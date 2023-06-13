@@ -1,0 +1,5 @@
+numpy
+pandas
+pytz
+python-dotenv
+tweepy
