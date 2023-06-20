@@ -3,9 +3,9 @@ import json
 import logging
 
 # library level import
-from tweepy import Stream
+import tweepy 
 
-class TweetsListener(Stream):
+class TweetsListener(tweepy.Stream):
     """
         Class constructor to isntantiate a tweet listener object with a cscocket
     """

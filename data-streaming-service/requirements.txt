@@ -2,4 +2,4 @@ numpy
 pandas
 pytz
 python-dotenv
-tweepy
+tweepy==4.11.0

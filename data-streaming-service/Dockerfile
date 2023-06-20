@@ -18,4 +18,4 @@ ENTRYPOINT [ "python" ]
 # docker container run -it --rm -v $(pwd)/data-streaming-service:/home/jovyan/work -p 8888:8888 --env-file 
 # .env data-stream-service jupyter-notebook jupyter/pyspark-notebook
 
-# docker container exec -it charming_johnson bash
+# docker container exec -it <container_name> bash

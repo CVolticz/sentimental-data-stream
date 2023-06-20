@@ -4,7 +4,7 @@
 """
 # system level import
 import os, sys
-import socket
+import socket   # network inteface
 
 # library level import
 from dotenv import load_dotenv
@@ -45,8 +45,9 @@ if __name__ == "__main__":
 
     # Now wait for client connection.
     # Establish connection with client.
+    # allows 5 unacepted connections before refusing
     s.listen(5)                 
-    c, addr = s.accept()        
+    c, addr = s.accept() 
     print( "Received request from: " + str( addr ) )
 
     # parameterized single-world filter on tweet
