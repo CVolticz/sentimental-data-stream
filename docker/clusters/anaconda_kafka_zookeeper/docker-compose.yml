@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+
+  zookeeper:
+    build: 
+      context: .
+      dockerfile: ../../images/zookeeper/Dockerfile
+    image: zookeeper
+    volumes:
+      - ../../mounts/zookeeper/data:/var/lib/zookeeper/data
+      - ../../mounts/zookeeoer/log:/var/lib/zookeeper/log
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 32181
+      ZOOKEEPER_TICK_TIME: 2000
+    expose:
+      - "2181"
+      - "2888"
+      - "32181"
+      - "3888"
+    extra_hosts:
+      - "moby:127.0.0.1"
+
+  kafka:
+    build: 
+      context: .
+      dockerfile: ../../images/kafka/Dockerfile
+    image: kafka
+    depends_on:
+      - zookeeper
+    volumes:
+      - ../../mounts/kafka/data:/var/lib/kafka/data
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:32181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    expose:
+      - "9092"
+      - "29092"
+    extra_hosts:
+      - "moby:127.0.0.1"
+
+  anaconda:
+    build: 
+      context: .
+      dockerfile: ../../images/anaconda/Dockerfile
+    image: anaconda
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../../../workspace:/workspace
+      - ../../mounts/anaconda/environments:/opt/conda/envs
+    expose:
+      - "8888"
+    ports:
+    
+      - "8888:8888"
